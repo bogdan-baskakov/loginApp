@@ -9,28 +9,26 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     // MARK: - IBOutlets
     @IBOutlet var loginTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setShadow(loginTextField)
         setShadow(passwordTextField)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! MainViewController
-        destinationVC.userName = (loginTextField?.text)!
+        destinationVC.userName = loginTextField.text ?? "User"
     }
     
     // MARK: - IBActions
     @IBAction func continuePressed() {
         checkLoginAndPassword()
-        
-        performSegue(withIdentifier: "showMainVC", sender: nil)
     }
     
     @IBAction func forgotLoginButtonPressed() {
@@ -45,9 +43,13 @@ class ViewController: UIViewController {
     
     // MARK: - Private Methods
     private func checkLoginAndPassword() {
-        if !(loginTextField.text == "Alexey" && passwordTextField.text == "2019") {
+        if !(loginTextField.text == "Alexey" &&
+            passwordTextField.text == "2019") {
+            
             showAlert(title: "Please Try Again",
                       message: "Login or Password is Incorrect.")
+        } else {
+            performSegue(withIdentifier: "showMainVC", sender: nil)
         }
     }
 }
