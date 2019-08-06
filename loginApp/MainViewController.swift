@@ -12,7 +12,6 @@ class MainViewController: UIViewController {
 
     @IBOutlet var userWelcomeLabel: UILabel!
     
-    
     var userName = ""
     
     override func viewDidLoad() {
